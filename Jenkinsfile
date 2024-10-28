@@ -5,7 +5,6 @@ pipeline {
     environment {                             
         PATH = "/opt/maven/bin:$PATH"         
     }                                         
-
     stages {                                  
         stage("build") {                      
             steps {                           
@@ -13,23 +12,19 @@ pipeline {
                                               
                 sh 'mvn clean deploy'
                                               
-                echo "----------- build completed ----------"
-                                             
+                echo "----------- build completed ----------"                                
             }                                 
         }                                     
         stage('SonarQube analysis') {         
             environment {                     
-                scannerHome = tool 'kotidemy-sonarqube-scanner'  
-				
+                scannerHome = tool 'saidemy-sonar-scanner'  	
             }                                 
-
             steps {                           
-                withSonarQubeEnv('kotidemy-sonarqube-server') {
+                withSonarQubeEnv('saidemy-sonar-server') {
                                               
-                    sh "${scannerHome}/bin/sonarqube-scanner"
-                                              
+                    sh "${scannerHome}/bin/sonar-scanner"                              
                 }                             
             }                                
         }                                     
     }                                         
-}               
+}  
