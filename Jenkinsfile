@@ -7,7 +7,6 @@ pipeline {
     }                                         
 
     stages {                                  
-
         stage("build") {                      
             steps {                           
                 echo "----------- build started ----------"
@@ -18,20 +17,19 @@ pipeline {
                                              
             }                                 
         }                                     
-
         stage('SonarQube analysis') {         
             environment {                     
-                scannerHome = tool 'kotidemy-sonarqube-scanner'
-                                              
+                scannerHome = tool 'kotidemy-sonarqube-scanner'  
+				
             }                                 
 
             steps {                           
                 withSonarQubeEnv('kotidemy-sonarqube-server') {
                                               
-                    sh "${scannerHome}/bin/sonar-scanner"
+                    sh "${scannerHome}/bin/sonarqube-scanner"
                                               
                 }                             
             }                                
         }                                     
     }                                         
-}  
+}               
