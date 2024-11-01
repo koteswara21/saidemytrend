@@ -17,17 +17,6 @@ pipeline {
                 echo "----------- build completed ----------"                                
             }                                 
         }                                     
-        stage('SonarQube analysis') {         
-            environment {                     
-                scannerHome = tool 'saidemy-sonar-scanner'  	
-            }                                 
-            steps {                           
-                withSonarQubeEnv('saidemy-sonar-server') {
-                                              
-                    sh "${scannerHome}/bin/sonar-scanner" 				
-                }                             
-            }                                
-        } 
         stage("Jar Publish") {               
             steps {                           
                 script {                      
